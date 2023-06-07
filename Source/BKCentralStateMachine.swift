@@ -25,7 +25,6 @@
 import Foundation
 
 internal class BKCentralStateMachine {
-
     // MARK: Enums
 
     internal enum BKError: Error {
@@ -47,7 +46,7 @@ internal class BKCentralStateMachine {
     // MARK: Initialization
 
     internal init() {
-        self.state = .initialized
+        state = .initialized
     }
 
     // MARK: Functions
@@ -74,14 +73,14 @@ internal class BKCentralStateMachine {
         case .initialized:
             state = .starting
         default:
-            throw BKError.transitioning(currentState: state, validStates: [ .initialized ])
+            throw BKError.transitioning(currentState: state, validStates: [.initialized])
         }
     }
 
     private func handleSetAvailableEvent(_ event: Event) throws {
         switch state {
         case .initialized:
-            throw BKError.transitioning(currentState: state, validStates: [ .starting, .available, .unavailable(cause: nil) ])
+            throw BKError.transitioning(currentState: state, validStates: [.starting, .available, .unavailable(cause: nil)])
         default:
             state = .available
         }
@@ -90,7 +89,7 @@ internal class BKCentralStateMachine {
     private func handleSetUnavailableEvent(_ event: Event, cause: BKUnavailabilityCause) throws {
         switch state {
         case .initialized:
-            throw BKError.transitioning(currentState: state, validStates: [ .starting, .available, .unavailable(cause: nil) ])
+            throw BKError.transitioning(currentState: state, validStates: [.starting, .available, .unavailable(cause: nil)])
         default:
             state = .unavailable(cause: cause)
         }
@@ -101,7 +100,7 @@ internal class BKCentralStateMachine {
         case .available:
             state = .scanning
         default:
-            throw BKError.transitioning(currentState: state, validStates: [ .available ])
+            throw BKError.transitioning(currentState: state, validStates: [.available])
         }
     }
 
@@ -110,17 +109,16 @@ internal class BKCentralStateMachine {
         case .available, .scanning:
             break
         default:
-            throw BKError.transitioning(currentState: state, validStates: [ .available, .scanning ])
+            throw BKError.transitioning(currentState: state, validStates: [.available, .scanning])
         }
     }
 
     private func handleStopEvent(_ event: Event) throws {
         switch state {
         case .initialized:
-            throw BKError.transitioning(currentState: state, validStates: [ .starting, .unavailable(cause: nil), .available, .scanning ])
+            throw BKError.transitioning(currentState: state, validStates: [.starting, .unavailable(cause: nil), .available, .scanning])
         default:
             state = .initialized
         }
     }
-
 }

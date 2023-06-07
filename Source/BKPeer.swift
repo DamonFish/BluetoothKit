@@ -24,10 +24,9 @@
 
 import Foundation
 
-public typealias BKSendDataCompletionHandler = ((_ data: Data, _ remotePeer: BKRemotePeer, _ error: BKError?) -> Void)
+public typealias BKSendDataCompletionHandler = (_ data: Data, _ remotePeer: BKRemotePeer, _ error: BKError?) -> Void
 
 public class BKPeer {
-
     /// The configuration the BKCentral object was started with.
     public var configuration: BKConfiguration? {
         return nil
@@ -90,7 +89,6 @@ public class BKPeer {
         } else {
             return
         }
-
     }
 
     internal func failSendDataTasksForRemotePeer(_ remotePeer: BKRemotePeer) {
@@ -103,5 +101,4 @@ public class BKPeer {
     internal func sendData(_ data: Data, toRemotePeer remotePeer: BKRemotePeer) -> Bool {
         fatalError("Function must be overridden by subclass")
     }
-
 }

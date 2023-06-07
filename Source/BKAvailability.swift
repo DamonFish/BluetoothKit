@@ -22,8 +22,8 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import CoreBluetooth
+import Foundation
 
 public func == (lhs: BKAvailability, rhs: BKAvailability) -> Bool {
     switch (lhs, rhs) {
@@ -33,7 +33,7 @@ public func == (lhs: BKAvailability, rhs: BKAvailability) -> Bool {
         return true
     case (.unavailable, .unavailable(cause: .any)):
         return true
-    case (.unavailable(let lhsCause), .unavailable(let rhsCause)):
+    case let (.unavailable(lhsCause), .unavailable(rhsCause)):
         return lhsCause == rhsCause
     default:
         return false
@@ -41,14 +41,13 @@ public func == (lhs: BKAvailability, rhs: BKAvailability) -> Bool {
 }
 
 /**
-    Bluetooth LE availability.
-    - Available: Bluetooth LE is available.
-    - Unavailable: Bluetooth LE is unavailable.
+ Bluetooth LE availability.
+ - Available: Bluetooth LE is available.
+ - Unavailable: Bluetooth LE is unavailable.
 
-    The unavailable case can be accompanied by a cause.
-*/
+ The unavailable case can be accompanied by a cause.
+ */
 public enum BKAvailability: Equatable {
-
     case available
     case unavailable(cause: BKUnavailabilityCause)
 
@@ -61,15 +60,14 @@ public enum BKAvailability: Equatable {
 }
 
 /**
-    Bluetooth LE unavailability cause.
-    - Any: When initialized with nil.
-    - Resetting: Bluetooth is resetting.
-    - Unsupported: Bluetooth LE is not supported on the device.
-    - Unauthorized: The app isn't allowed to use Bluetooth.
-    - PoweredOff: Bluetooth is turned off.
-*/
+ Bluetooth LE unavailability cause.
+ - Any: When initialized with nil.
+ - Resetting: Bluetooth is resetting.
+ - Unsupported: Bluetooth LE is not supported on the device.
+ - Unauthorized: The app isn't allowed to use Bluetooth.
+ - PoweredOff: Bluetooth is turned off.
+ */
 public enum BKUnavailabilityCause: ExpressibleByNilLiteral {
-
     case any
     case resetting
     case unsupported
@@ -92,8 +90,8 @@ public enum BKUnavailabilityCause: ExpressibleByNilLiteral {
 }
 
 /**
-    Classes that can be observed for Bluetooth LE availability implement this protocol.
-*/
+ Classes that can be observed for Bluetooth LE availability implement this protocol.
+ */
 public protocol BKAvailabilityObservable: AnyObject {
     var availabilityObservers: [BKWeakAvailabilityObserver] { get set }
     func addAvailabilityObserver(_ availabilityObserver: BKAvailabilityObserver)
@@ -101,21 +99,20 @@ public protocol BKAvailabilityObservable: AnyObject {
 }
 
 /**
-    Class used to hold a weak reference to an observer of Bluetooth LE availability.
-*/
+ Class used to hold a weak reference to an observer of Bluetooth LE availability.
+ */
 public class BKWeakAvailabilityObserver {
     weak var availabilityObserver: BKAvailabilityObserver?
-    init (availabilityObserver: BKAvailabilityObserver) {
+    init(availabilityObserver: BKAvailabilityObserver) {
         self.availabilityObserver = availabilityObserver
     }
 }
 
 public extension BKAvailabilityObservable {
-
     /**
-        Add a new availability observer. The observer will be weakly stored. If the observer is already subscribed the call will be ignored.
-        - parameter availabilityObserver: The availability observer to add.
-    */
+         Add a new availability observer. The observer will be weakly stored. If the observer is already subscribed the call will be ignored.
+         - parameter availabilityObserver: The availability observer to add.
+     */
     func addAvailabilityObserver(_ availabilityObserver: BKAvailabilityObserver) {
         if !availabilityObservers.contains(where: { $0.availabilityObserver === availabilityObserver }) {
             availabilityObservers.append(BKWeakAvailabilityObserver(availabilityObserver: availabilityObserver))
@@ -123,33 +120,31 @@ public extension BKAvailabilityObservable {
     }
 
     /**
-        Remove an availability observer. If the observer isn't subscribed the call will be ignored.
-        - parameter availabilityObserver: The availability observer to remove.
-    */
+         Remove an availability observer. If the observer isn't subscribed the call will be ignored.
+         - parameter availabilityObserver: The availability observer to remove.
+     */
     func removeAvailabilityObserver(_ availabilityObserver: BKAvailabilityObserver) {
         if availabilityObservers.contains(where: { $0.availabilityObserver === availabilityObserver }) {
             availabilityObservers.remove(at: availabilityObservers.firstIndex(where: { $0 === availabilityObserver })!)
         }
     }
-
 }
 
 /**
-    Observers of Bluetooth LE availability should implement this protocol.
-*/
+ Observers of Bluetooth LE availability should implement this protocol.
+ */
 public protocol BKAvailabilityObserver: AnyObject {
-
     /**
-        Informs the observer about a change in Bluetooth LE availability.
-        - parameter availabilityObservable: The object that registered the availability change.
-        - parameter availability: The new availability value.
-    */
+         Informs the observer about a change in Bluetooth LE availability.
+         - parameter availabilityObservable: The object that registered the availability change.
+         - parameter availability: The new availability value.
+     */
     func availabilityObserver(_ availabilityObservable: BKAvailabilityObservable, availabilityDidChange availability: BKAvailability)
 
     /**
-        Informs the observer that the cause of Bluetooth LE unavailability changed.
-        - parameter availabilityObservable: The object that registered the cause change.
-        - parameter unavailabilityCause: The new cause of unavailability.
-    */
+         Informs the observer that the cause of Bluetooth LE unavailability changed.
+         - parameter availabilityObservable: The object that registered the cause change.
+         - parameter unavailabilityCause: The new cause of unavailability.
+     */
     func availabilityObserver(_ availabilityObservable: BKAvailabilityObservable, unavailabilityCauseDidChange unavailabilityCause: BKUnavailabilityCause)
 }

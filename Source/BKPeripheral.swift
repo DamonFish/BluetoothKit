@@ -22,35 +22,34 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import CoreBluetooth
+import Foundation
 
 /**
-    The peripheral's delegate is called when asynchronous events occur.
-*/
+ The peripheral's delegate is called when asynchronous events occur.
+ */
 
 public protocol BKPeripheralDelegate: AnyObject {
     /**
-        Called when a remote central connects and is ready to receive data.
-        - parameter peripheral: The peripheral object to which the remote central connected.
-        - parameter remoteCentral: The remote central that connected.
-    */
+         Called when a remote central connects and is ready to receive data.
+         - parameter peripheral: The peripheral object to which the remote central connected.
+         - parameter remoteCentral: The remote central that connected.
+     */
     func peripheral(_ peripheral: BKPeripheral, remoteCentralDidConnect remoteCentral: BKRemoteCentral)
     /**
-        Called when a remote central disconnects and can no longer receive data.
-        - parameter peripheral: The peripheral object from which the remote central disconnected.
-        - parameter remoteCentral: The remote central that disconnected.
-    */
+         Called when a remote central disconnects and can no longer receive data.
+         - parameter peripheral: The peripheral object from which the remote central disconnected.
+         - parameter remoteCentral: The remote central that disconnected.
+     */
     func peripheral(_ peripheral: BKPeripheral, remoteCentralDidDisconnect remoteCentral: BKRemoteCentral)
 }
 
 /**
-    The class used to take the Bluetooth LE peripheral role. Peripherals can be discovered and connected to by centrals.
-    One a central has connected, the peripheral can send data to it.
-*/
+ The class used to take the Bluetooth LE peripheral role. Peripherals can be discovered and connected to by centrals.
+ One a central has connected, the peripheral can send data to it.
+ */
 
 public class BKPeripheral: BKPeer, BKCBPeripheralManagerDelegate, BKAvailabilityObservable {
-
     // MARK: Properies
 
     /// Bluetooth LE availability derived from the underlying CBPeripheralManager object.
@@ -86,7 +85,7 @@ public class BKPeripheral: BKPeer, BKCBPeripheralManagerDelegate, BKAvailability
 
     // MARK: Initialization
 
-    public override init() {
+    override public init() {
         super.init()
         peripheralManagerDelegateProxy = BKCBPeripheralManagerDelegateProxy(delegate: self)
     }
@@ -94,25 +93,25 @@ public class BKPeripheral: BKPeer, BKCBPeripheralManagerDelegate, BKAvailability
     // MARK: Public Functions
 
     /**
-        Starts the BKPeripheral object. Once started the peripheral will be discoverable and possible to connect to
-        by remote centrals, provided that Bluetooth LE is available.
-        - parameter configuration: A configuration defining the unique identifiers along with the name to be broadcasted.
-        - throws: An internal error if the BKPeripheral object was already started.
-    */
+         Starts the BKPeripheral object. Once started the peripheral will be discoverable and possible to connect to
+         by remote centrals, provided that Bluetooth LE is available.
+         - parameter configuration: A configuration defining the unique identifiers along with the name to be broadcasted.
+         - throws: An internal error if the BKPeripheral object was already started.
+     */
     public func startWithConfiguration(_ configuration: BKPeripheralConfiguration) throws {
         do {
             try stateMachine.handleEvent(event: .start)
             _configuration = configuration
             peripheralManager = CBPeripheralManager(delegate: peripheralManagerDelegateProxy, queue: nil, options: nil)
-        } catch let error {
+        } catch {
             throw BKError.internalError(underlyingError: error)
         }
     }
 
     /**
-        Stops the BKPeripheral object.
-        - throws: An internal error if the peripheral object wasn't started.
-    */
+         Stops the BKPeripheral object.
+         - throws: An internal error if the peripheral object wasn't started.
+     */
     public func stop() throws {
         do {
             try stateMachine.handleEvent(event: .stop)
@@ -122,7 +121,7 @@ public class BKPeripheral: BKPeer, BKCBPeripheralManagerDelegate, BKAvailability
             }
             peripheralManager.removeAllServices()
             peripheralManager = nil
-        } catch let error {
+        } catch {
             throw BKError.internalError(underlyingError: error)
         }
     }
@@ -152,19 +151,19 @@ public class BKPeripheral: BKPeer, BKCBPeripheralManagerDelegate, BKAvailability
         }
         if !peripheralManager.isAdvertising {
             dataService = CBMutableService(type: _configuration.dataServiceUUID, primary: true)
-            let properties: CBCharacteristicProperties = [ .read, .notify, .writeWithoutResponse, .write ]
-            let permissions: CBAttributePermissions = [ .readable, .writeable ]
+            let properties: CBCharacteristicProperties = [.read, .notify, .writeWithoutResponse, .write]
+            let permissions: CBAttributePermissions = [.readable, .writeable]
             characteristicData = CBMutableCharacteristic(type: _configuration.dataServiceCharacteristicUUID, properties: properties, value: nil, permissions: permissions)
-            dataService.characteristics = [ characteristicData ]
+            dataService.characteristics = [characteristicData]
             peripheralManager.add(dataService)
         }
     }
 
-    internal override func sendData(_ data: Data, toRemotePeer remotePeer: BKRemotePeer) -> Bool {
+    override internal func sendData(_ data: Data, toRemotePeer remotePeer: BKRemotePeer) -> Bool {
         guard let remoteCentral = remotePeer as? BKRemoteCentral else {
             return false
         }
-        return peripheralManager.updateValue(data, for: characteristicData, onSubscribedCentrals: [ remoteCentral.central ])
+        return peripheralManager.updateValue(data, for: characteristicData, onSubscribedCentrals: [remoteCentral.central])
     }
 
     private func handleDisconnectForRemoteCentral(_ remoteCentral: BKRemoteCentral) {
@@ -205,13 +204,11 @@ public class BKPeripheral: BKPeer, BKCBPeripheralManagerDelegate, BKAvailability
         }
     }
 
-    internal func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
-
-    }
+    internal func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {}
 
     internal func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?) {
         if !peripheralManager.isAdvertising {
-            var advertisementData: [String: Any] = [ CBAdvertisementDataServiceUUIDsKey: _configuration.serviceUUIDs ]
+            var advertisementData: [String: Any] = [CBAdvertisementDataServiceUUIDsKey: _configuration.serviceUUIDs]
             if let localName = _configuration.localName {
                 advertisementData[CBAdvertisementDataLocalNameKey] = localName
             }
@@ -227,7 +224,7 @@ public class BKPeripheral: BKPeer, BKCBPeripheralManagerDelegate, BKAvailability
     }
 
     internal func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didUnsubscribeFromCharacteristic characteristic: CBCharacteristic) {
-        if let remoteCentral = connectedRemotePeers.filter({ ($0.identifier == central.identifier) }).last as? BKRemoteCentral {
+        if let remoteCentral = connectedRemotePeers.filter({ $0.identifier == central.identifier }).last as? BKRemoteCentral {
             handleDisconnectForRemoteCentral(remoteCentral)
         }
     }
@@ -237,9 +234,10 @@ public class BKPeripheral: BKPeer, BKCBPeripheralManagerDelegate, BKAvailability
             guard writeRequest.characteristic.uuid == characteristicData.uuid else {
                 continue
             }
-            guard let remotePeer = (connectedRemotePeers.filter { $0.identifier == writeRequest.central.identifier } .last),
+            guard let remotePeer = (connectedRemotePeers.filter { $0.identifier == writeRequest.central.identifier }.last),
                   let remoteCentral = remotePeer as? BKRemoteCentral,
-                  let data = writeRequest.value else {
+                  let data = writeRequest.value
+            else {
                 continue
             }
             remoteCentral.handleReceivedData(data)
@@ -249,5 +247,4 @@ public class BKPeripheral: BKPeer, BKCBPeripheralManagerDelegate, BKAvailability
     internal func peripheralManagerIsReadyToUpdateSubscribers(_ peripheral: CBPeripheralManager) {
         processSendDataTasks()
     }
-
 }

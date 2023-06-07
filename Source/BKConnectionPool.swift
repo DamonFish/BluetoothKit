@@ -22,15 +22,14 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import CoreBluetooth
+import Foundation
 
 internal protocol BKConnectionPoolDelegate: AnyObject {
     func connectionPool(_ connectionPool: BKConnectionPool, remotePeripheralDidDisconnect remotePeripheral: BKRemotePeripheral)
 }
 
 internal class BKConnectionPool: BKCBCentralManagerConnectionDelegate {
-
     // MARK: Enums
 
     internal enum BKError: Error {
@@ -160,5 +159,4 @@ internal class BKConnectionPool: BKCBCentralManagerConnectionDelegate {
             delegate?.connectionPool(self, remotePeripheralDidDisconnect: remotePeripheral)
         }
     }
-
 }

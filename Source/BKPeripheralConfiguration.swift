@@ -22,14 +22,13 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import CoreBluetooth
+import Foundation
 
 /**
-    A subclass of BKConfiguration for constructing configurations to use when starting BKPeripheral objects.
-*/
+ A subclass of BKConfiguration for constructing configurations to use when starting BKPeripheral objects.
+ */
 public class BKPeripheralConfiguration: BKConfiguration {
-
     // MARK: Properties
 
     /// The local name to broadcast to remote centrals.
@@ -41,5 +40,4 @@ public class BKPeripheralConfiguration: BKConfiguration {
         self.localName = localName
         super.init(dataServiceUUID: dataServiceUUID, dataServiceCharacteristicUUID: dataServiceCharacteristicUUID)
     }
-
 }

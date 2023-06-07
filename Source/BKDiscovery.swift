@@ -29,10 +29,9 @@ public func == (lhs: BKDiscovery, rhs: BKDiscovery) -> Bool {
 }
 
 /**
-    A discovery made while scanning, containing a peripheral, the advertisement data and RSSI.
-*/
+ A discovery made while scanning, containing a peripheral, the advertisement data and RSSI.
+ */
 public struct BKDiscovery: Equatable {
-
     // MARK: Properties
 
     /// The advertised name derived from the advertisement data.
@@ -56,5 +55,4 @@ public struct BKDiscovery: Equatable {
         self.remotePeripheral = remotePeripheral
         self.RSSI = RSSI
     }
-
 }

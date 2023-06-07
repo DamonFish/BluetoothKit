@@ -29,7 +29,6 @@ internal func == (lhs: BKSendDataTask, rhs: BKSendDataTask) -> Bool {
 }
 
 internal class BKSendDataTask: Equatable {
-
     // MARK: Properties
 
     internal let data: Data
@@ -57,7 +56,7 @@ internal class BKSendDataTask: Equatable {
 
     internal var nextPayload: Data? {
         if let range = rangeForNextPayload {
-             return data.subdata(in: range)
+            return data.subdata(in: range)
         } else {
             return nil
         }
@@ -70,5 +69,4 @@ internal class BKSendDataTask: Equatable {
         self.destination = destination
         self.completionHandler = completionHandler
     }
-
 }

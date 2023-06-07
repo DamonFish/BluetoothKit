@@ -22,19 +22,18 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import CoreBluetooth
+import Foundation
 
 /**
-    The delegate of a remote peripheral receives callbacks when asynchronous events occur.
-*/
+ The delegate of a remote peripheral receives callbacks when asynchronous events occur.
+ */
 public protocol BKRemotePeripheralDelegate: AnyObject {
-
     /**
-        Called when the remote peripheral updated its name.
-        - parameter remotePeripheral: The remote peripheral that updated its name.
-        - parameter name: The new name.
-    */
+         Called when the remote peripheral updated its name.
+         - parameter remotePeripheral: The remote peripheral that updated its name.
+         - parameter name: The new name.
+     */
     func remotePeripheral(_ remotePeripheral: BKRemotePeripheral, didUpdateName name: String)
 
     /**
@@ -42,24 +41,22 @@ public protocol BKRemotePeripheralDelegate: AnyObject {
      - parameter remotePeripheral: The remote peripheral that is ready.
      */
     func remotePeripheralIsReady(_ remotePeripheral: BKRemotePeripheral)
-
 }
 
 /**
-    Class to represent a remote peripheral that can be connected to by BKCentral objects.
-*/
+ Class to represent a remote peripheral that can be connected to by BKCentral objects.
+ */
 public class BKRemotePeripheral: BKRemotePeer, BKCBPeripheralDelegate {
-
     // MARK: Enums
 
     /**
-        Possible states for BKRemotePeripheral objects.
-        - Shallow: The peripheral was initialized only with an identifier (used when one wants to connect to a peripheral for which the identifier is known in advance).
-        - Disconnected: The peripheral is disconnected.
-        - Connecting: The peripheral is currently connecting.
-        - Connected: The peripheral is already connected.
-        - Disconnecting: The peripheral is currently disconnecting.
-    */
+         Possible states for BKRemotePeripheral objects.
+         - Shallow: The peripheral was initialized only with an identifier (used when one wants to connect to a peripheral for which the identifier is known in advance).
+         - Disconnected: The peripheral is disconnected.
+         - Connecting: The peripheral is currently connecting.
+         - Connected: The peripheral is already connected.
+         - Disconnecting: The peripheral is currently disconnecting.
+     */
     public enum State {
         case shallow, disconnected, connecting, connected, disconnecting
     }
@@ -82,7 +79,6 @@ public class BKRemotePeripheral: BKRemotePeer, BKCBPeripheralDelegate {
             return .disconnecting
         @unknown default:
             return .shallow
-
         }
     }
 
@@ -114,7 +110,7 @@ public class BKRemotePeripheral: BKRemotePeer, BKCBPeripheralDelegate {
 
     public init(identifier: UUID, peripheral: CBPeripheral?) {
         super.init(identifier: identifier)
-        self.peripheralDelegateProxy = BKCBPeripheralDelegateProxy(delegate: self)
+        peripheralDelegateProxy = BKCBPeripheralDelegateProxy(delegate: self)
         self.peripheral = peripheral
     }
 
@@ -180,5 +176,4 @@ public class BKRemotePeripheral: BKRemotePeer, BKCBPeripheralDelegate {
         }
         handleReceivedData(characteristic.value!)
     }
-
 }

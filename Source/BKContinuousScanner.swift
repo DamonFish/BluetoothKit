@@ -25,10 +25,9 @@
 import Foundation
 
 internal class BKContinousScanner {
-
     // MARK: Type Aliases
 
-    internal typealias ErrorHandler = ((_ error: BKError) -> Void)
+    internal typealias ErrorHandler = (_ error: BKError) -> Void
     internal typealias StateHandler = BKCentral.ContinuousScanStateHandler
     internal typealias ChangeHandler = BKCentral.ContinuousScanChangeHandler
 
@@ -89,20 +88,19 @@ internal class BKContinousScanner {
         do {
             state = .scanning
             stateHandler?(state)
-            try scanner.scanWithDuration(duration, updateDuplicates: self.updateDuplicates, progressHandler: { newDiscoveries in
+            try scanner.scanWithDuration(duration, updateDuplicates: updateDuplicates, progressHandler: { newDiscoveries in
                 var changes: [BKDiscoveriesChange] = []
 
-                //find discoveries that have been updated and add a change for each
+                // find discoveries that have been updated and add a change for each
                 for newDiscovery in newDiscoveries {
                     if let index = self.maintainedDiscoveries.firstIndex(of: newDiscovery) {
                         let outdatedDiscovery = self.maintainedDiscoveries[index]
                         self.maintainedDiscoveries[index] = newDiscovery
 
-                        //TODO: probably need an update change
+                        // TODO: probably need an update change
                         changes.append(.remove(discovery: outdatedDiscovery))
                         changes.append(.insert(discovery: newDiscovery))
                     } else if !self.maintainedDiscoveries.contains(newDiscovery) {
-
                         self.maintainedDiscoveries.append(newDiscovery)
                         changes.append(.insert(discovery: newDiscovery))
                     }
@@ -126,7 +124,7 @@ internal class BKContinousScanner {
                 self.stateHandler?(self.state)
                 self.inBetweenDelayTimer = Timer.scheduledTimer(timeInterval: self.inBetweenDelay, target: self, selector: #selector(BKContinousScanner.inBetweenDelayTimerElapsed), userInfo: nil, repeats: false)
             })
-        } catch let error {
+        } catch {
             endScanning(BKError.internalError(underlyingError: error))
         }
     }
@@ -154,5 +152,4 @@ internal class BKContinousScanner {
     @objc private func inBetweenDelayTimerElapsed() {
         scan()
     }
-
 }

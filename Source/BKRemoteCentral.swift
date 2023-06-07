@@ -22,14 +22,13 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import CoreBluetooth
+import Foundation
 
 /**
-    Representation of a remote central.
-*/
+ Representation of a remote central.
+ */
 public class BKRemoteCentral: BKRemotePeer {
-
     // MARK: Properties
 
     internal let central: CBCentral
@@ -44,5 +43,4 @@ public class BKRemoteCentral: BKRemotePeer {
         self.central = central
         super.init(identifier: central.identifier)
     }
-
 }

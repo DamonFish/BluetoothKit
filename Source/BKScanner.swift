@@ -22,14 +22,13 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import CoreBluetooth
+import Foundation
 
 internal class BKScanner: BKCBCentralManagerDiscoveryDelegate {
-
     // MARK: Type Aliases
 
-    internal typealias ScanCompletionHandler = ((_ result: [BKDiscovery]?, _ error: BKError?) -> Void)
+    internal typealias ScanCompletionHandler = (_ result: [BKDiscovery]?, _ error: BKError?) -> Void
 
     // MARK: Enums
 
@@ -44,7 +43,7 @@ internal class BKScanner: BKCBCentralManagerDiscoveryDelegate {
     internal var configuration: BKConfiguration!
     internal var centralManager: CBCentralManager!
     private var busy = false
-    private var scanHandlers: (progressHandler: BKCentral.ScanProgressHandler?, completionHandler: ScanCompletionHandler )?
+    private var scanHandlers: (progressHandler: BKCentral.ScanProgressHandler?, completionHandler: ScanCompletionHandler)?
     private var discoveries = [BKDiscovery]()
     private var durationTimer: Timer?
 
@@ -54,13 +53,13 @@ internal class BKScanner: BKCBCentralManagerDiscoveryDelegate {
         do {
             try validateForActivity()
             busy = true
-            scanHandlers = ( progressHandler: progressHandler, completionHandler: completionHandler)
+            scanHandlers = (progressHandler: progressHandler, completionHandler: completionHandler)
             let options = [CBCentralManagerScanOptionAllowDuplicatesKey: updateDuplicates]
             centralManager.scanForPeripherals(withServices: configuration.serviceUUIDs, options: options)
             if duration > 0 {
                 durationTimer = Timer.scheduledTimer(timeInterval: duration, target: self, selector: #selector(BKScanner.durationTimerElapsed), userInfo: nil, repeats: false)
             }
-        } catch let error {
+        } catch {
             throw error
         }
     }
@@ -99,7 +98,7 @@ internal class BKScanner: BKCBCentralManagerDiscoveryDelegate {
     }
 
     private func invalidateTimer() {
-        if let durationTimer = self.durationTimer {
+        if let durationTimer = durationTimer {
             durationTimer.invalidate()
             self.durationTimer = nil
         }
@@ -120,7 +119,6 @@ internal class BKScanner: BKCBCentralManagerDiscoveryDelegate {
         } else {
             discoveries.append(discovery)
         }
-        scanHandlers?.progressHandler?([ discovery ])
+        scanHandlers?.progressHandler?([discovery])
     }
-
 }

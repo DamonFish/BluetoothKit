@@ -25,7 +25,6 @@
 import Foundation
 
 internal class BKPeripheralStateMachine {
-
     // MARK: Enums
 
     internal enum BKError: Error {
@@ -47,7 +46,7 @@ internal class BKPeripheralStateMachine {
     // MARK: Initialization
 
     internal init() {
-        self.state = .initialized
+        state = .initialized
     }
 
     // MARK: Functions
@@ -70,14 +69,14 @@ internal class BKPeripheralStateMachine {
         case .initialized:
             state = .starting
         default:
-            throw BKError.transitioning(currentState: state, validStates: [ .initialized ])
+            throw BKError.transitioning(currentState: state, validStates: [.initialized])
         }
     }
 
     private func handleSetAvailableEvent(event: Event) throws {
         switch state {
         case .initialized:
-            throw BKError.transitioning(currentState: state, validStates: [ .starting, .available, .unavailable(cause: nil) ])
+            throw BKError.transitioning(currentState: state, validStates: [.starting, .available, .unavailable(cause: nil)])
         default:
             state = .available
         }
@@ -86,7 +85,7 @@ internal class BKPeripheralStateMachine {
     private func handleSetUnavailableEvent(event: Event, withCause cause: BKUnavailabilityCause) throws {
         switch state {
         case .initialized:
-            throw BKError.transitioning(currentState: state, validStates: [ .starting, .available, .unavailable(cause: nil) ])
+            throw BKError.transitioning(currentState: state, validStates: [.starting, .available, .unavailable(cause: nil)])
         default:
             state = .unavailable(cause: cause)
         }
@@ -95,10 +94,9 @@ internal class BKPeripheralStateMachine {
     private func handleStopEvent(event: Event) throws {
         switch state {
         case .initialized:
-            throw BKError.transitioning(currentState: state, validStates: [ .starting, .available, .unavailable(cause: nil) ])
+            throw BKError.transitioning(currentState: state, validStates: [.starting, .available, .unavailable(cause: nil)])
         default:
             state = .initialized
         }
     }
-
 }

@@ -22,8 +22,8 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import CoreBluetooth
+import Foundation
 
 internal protocol BKCBPeripheralManagerDelegate: AnyObject {
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager)
@@ -36,7 +36,6 @@ internal protocol BKCBPeripheralManagerDelegate: AnyObject {
 }
 
 internal class BKCBPeripheralManagerDelegateProxy: NSObject, CBPeripheralManagerDelegate {
-
     // MARK: Properties
 
     internal weak var delegate: BKCBPeripheralManagerDelegate?
@@ -87,5 +86,4 @@ internal class BKCBPeripheralManagerDelegateProxy: NSObject, CBPeripheralManager
 //         print("peripheralManagerIsReadyToUpdateSubscribers: \(peripheral)")
         delegate?.peripheralManagerIsReadyToUpdateSubscribers(peripheral)
     }
-
 }

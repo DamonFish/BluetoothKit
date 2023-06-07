@@ -26,9 +26,9 @@ import Foundation
 
 public func == (lhs: BKDiscoveriesChange, rhs: BKDiscoveriesChange) -> Bool {
     switch (lhs, rhs) {
-    case (.insert(let lhsDiscovery), .insert(let rhsDiscovery)):
+    case let (.insert(lhsDiscovery), .insert(rhsDiscovery)):
         return lhsDiscovery == rhsDiscovery || lhsDiscovery == nil || rhsDiscovery == nil
-    case (.remove(let lhsDiscovery), .remove(let rhsDiscovery)):
+    case let (.remove(lhsDiscovery), .remove(rhsDiscovery)):
         return lhsDiscovery == rhsDiscovery || lhsDiscovery == nil || rhsDiscovery == nil
     default:
         return false
@@ -36,25 +36,23 @@ public func == (lhs: BKDiscoveriesChange, rhs: BKDiscoveriesChange) -> Bool {
 }
 
 /**
-    Change in available discoveries.
-    - Insert: A new discovery.
-    - Remove: A discovery has become unavailable.
+ Change in available discoveries.
+ - Insert: A new discovery.
+ - Remove: A discovery has become unavailable.
 
-    Cases without associated discoveries can be used to validate whether or not a change is and insert or a remove.
-*/
+ Cases without associated discoveries can be used to validate whether or not a change is and insert or a remove.
+ */
 public enum BKDiscoveriesChange: Equatable {
-
     case insert(discovery: BKDiscovery?)
     case remove(discovery: BKDiscovery?)
 
     /// The discovery associated with the change.
     public var discovery: BKDiscovery! {
         switch self {
-        case .insert(let discovery):
+        case let .insert(discovery):
             return discovery
-        case .remove(let discovery):
+        case let .remove(discovery):
             return discovery
         }
     }
-
 }

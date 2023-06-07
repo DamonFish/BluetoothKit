@@ -22,8 +22,8 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import CoreBluetooth
+import Foundation
 
 internal protocol BKCBCentralManagerStateDelegate: AnyObject {
     func centralManagerDidUpdateState(_ central: CBCentralManager)
@@ -40,7 +40,6 @@ internal protocol BKCBCentralManagerConnectionDelegate: AnyObject {
 }
 
 internal class BKCBCentralManagerDelegateProxy: NSObject, CBCentralManagerDelegate {
-
     // MARK: Initialization
 
     internal init(stateDelegate: BKCBCentralManagerStateDelegate, discoveryDelegate: BKCBCentralManagerDiscoveryDelegate, connectionDelegate: BKCBCentralManagerConnectionDelegate) {
@@ -77,5 +76,4 @@ internal class BKCBCentralManagerDelegateProxy: NSObject, CBCentralManagerDelega
     internal func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         connectionDelegate?.centralManager(central, didDisconnectPeripheral: peripheral, error: error)
     }
-
 }

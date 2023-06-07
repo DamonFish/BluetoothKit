@@ -29,12 +29,11 @@ internal func == (lhs: BKConnectionAttempt, rhs: BKConnectionAttempt) -> Bool {
 }
 
 internal class BKConnectionAttempt: Equatable {
-
     // MARK: Properties
 
     internal let timer: Timer
     internal let remotePeripheral: BKRemotePeripheral
-    internal let completionHandler: ((_ peripheralEntity: BKRemotePeripheral, _ error: BKConnectionPool.BKError?) -> Void)
+    internal let completionHandler: (_ peripheralEntity: BKRemotePeripheral, _ error: BKConnectionPool.BKError?) -> Void
 
     // MARK: Initialization
 

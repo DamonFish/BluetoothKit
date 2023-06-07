@@ -22,14 +22,13 @@
 //  THE SOFTWARE.
 //
 
-import Foundation
 import CoreBluetooth
+import Foundation
 
 /**
-    Class that represents a configuration used when starting a BKCentral object.
-*/
+ Class that represents a configuration used when starting a BKCentral object.
+ */
 public class BKConfiguration {
-
     // MARK: Properties
 
     /// The UUID for the service used to send data. This should be unique to your applications.
@@ -45,7 +44,7 @@ public class BKConfiguration {
     public var dataCancelledMark: Data
 
     internal var serviceUUIDs: [CBUUID] {
-        let serviceUUIDs = [ dataServiceUUID ]
+        let serviceUUIDs = [dataServiceUUID]
         return serviceUUIDs
     }
 
@@ -62,9 +61,8 @@ public class BKConfiguration {
 
     internal func characteristicUUIDsForServiceUUID(_ serviceUUID: CBUUID) -> [CBUUID] {
         if serviceUUID == dataServiceUUID {
-            return [ dataServiceCharacteristicUUID ]
+            return [dataServiceCharacteristicUUID]
         }
         return []
     }
-
 }
