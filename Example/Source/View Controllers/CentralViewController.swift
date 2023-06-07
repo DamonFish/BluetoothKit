@@ -89,7 +89,8 @@ internal class CentralViewController: UIViewController, UITableViewDataSource, U
             central.addAvailabilityObserver(self)
             let dataServiceUUID = UUID(uuidString: "6E6B5C64-FAF7-40AE-9C21-D4933AF45B23")!
             let dataServiceCharacteristicUUID = UUID(uuidString: "477A2967-1FAB-4DC5-920A-DEE5DE685A3D")!
-            let configuration = BKConfiguration(dataServiceUUID: dataServiceUUID, dataServiceCharacteristicUUID: dataServiceCharacteristicUUID)
+            
+            let configuration = BKConfiguration(dataServiceCBUUIDs: [], characteristicUUIDs: [])
             try central.startWithConfiguration(configuration)
         } catch let error {
             print("Error while starting: \(error)")

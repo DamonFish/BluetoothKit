@@ -47,7 +47,8 @@ public func == (lhs: BKAvailability, rhs: BKAvailability) -> Bool {
 
  The unavailable case can be accompanied by a cause.
  */
-public enum BKAvailability: Equatable {
+public enum BKAvailability: Equatable, CustomDebugStringConvertible {
+    
     case available
     case unavailable(cause: BKUnavailabilityCause)
 
@@ -55,6 +56,15 @@ public enum BKAvailability: Equatable {
         switch managerState {
         case .poweredOn: self = .available
         default: self = .unavailable(cause: BKUnavailabilityCause(managerState: managerState))
+        }
+    }
+    
+    public var debugDescription: String {
+        switch self {
+        case .available:
+            return "available"
+        case .unavailable(let cause):
+            return "unavailable cause: \(cause.debugDescription)"
         }
     }
 }
@@ -67,7 +77,7 @@ public enum BKAvailability: Equatable {
  - Unauthorized: The app isn't allowed to use Bluetooth.
  - PoweredOff: Bluetooth is turned off.
  */
-public enum BKUnavailabilityCause: ExpressibleByNilLiteral {
+public enum BKUnavailabilityCause: ExpressibleByNilLiteral, CustomDebugStringConvertible {
     case any
     case resetting
     case unsupported
@@ -85,6 +95,21 @@ public enum BKUnavailabilityCause: ExpressibleByNilLiteral {
         case .unauthorized: self = .unauthorized
         case .unsupported: self = .unsupported
         default: self = nil
+        }
+    }
+    
+    public var debugDescription: String {
+        switch self {
+        case .any:
+            return "any"
+        case .resetting:
+            return "resetting"
+        case .unsupported:
+            return "unsupported"
+        case .unauthorized:
+            return "unauthorized"
+        case .poweredOff:
+            return "poweredOff"
         }
     }
 }

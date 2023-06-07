@@ -25,6 +25,7 @@
 import UIKit
 import BluetoothKit
 import CryptoSwift
+import CoreBluetooth
 
 internal protocol RemotePeripheralViewControllerDelegate: AnyObject {
     func remotePeripheralViewControllerWillDismiss(_ remotePeripheralViewController: RemotePeripheralViewController)
@@ -96,6 +97,18 @@ internal class RemotePeripheralViewController: UIViewController, BKRemotePeriphe
 
     internal func remotePeripheralIsReady(_ remotePeripheral: BKRemotePeripheral) {
         Logger.log("Peripheral ready: \(remotePeripheral)")
+    }
+    
+    func remotePeripheral(_ remotePeripheral: BKRemotePeripheral, peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        Logger.log("Peripheral didDiscoverServices: \(remotePeripheral)")
+    }
+    
+    func remotePeripheral(_ remotePeripheral: BluetoothKit.BKRemotePeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        Logger.log("Peripheral didDiscoverCharacteristicsFor: \(remotePeripheral)")
+    }
+    
+    func remotePeripheral(_ remotePeripheral: BluetoothKit.BKRemotePeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        Logger.log("Peripheral didUpdateValueFor: \(characteristic)")
     }
 
     // MARK: Target Actions

@@ -104,7 +104,8 @@ public class BKCentral: BKPeer, BKCBCentralManagerStateDelegate, BKConnectionPoo
         }
     }
 
-    private var centralManager: CBCentralManager? {
+    // TODO: change back to private later
+    public var centralManager: CBCentralManager? {
         return _centralManager
     }
 
@@ -315,12 +316,11 @@ public class BKCentral: BKPeer, BKCBCentralManagerStateDelegate, BKConnectionPoo
 
     override internal func sendData(_ data: Data, toRemotePeer remotePeer: BKRemotePeer) -> Bool {
         guard let remotePeripheral = remotePeer as? BKRemotePeripheral,
-              let peripheral = remotePeripheral.peripheral,
-              let characteristic = remotePeripheral.characteristicData
+              let characteristic = remotePeripheral.writeCharacteristic
         else {
             return false
         }
-        peripheral.writeValue(data, for: characteristic, type: .withoutResponse)
+        remotePeripheral.peripheral.writeValue(data, for: characteristic, type: .withResponse)
         return true
     }
 

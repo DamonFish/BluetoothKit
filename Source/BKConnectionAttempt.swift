@@ -33,11 +33,11 @@ internal class BKConnectionAttempt: Equatable {
 
     internal let timer: Timer
     internal let remotePeripheral: BKRemotePeripheral
-    internal let completionHandler: (_ peripheralEntity: BKRemotePeripheral, _ error: BKConnectionPool.BKError?) -> Void
+    internal let completionHandler: (_ peripheralEntity: BKRemotePeripheral, _ error: BKConnectError?) -> Void
 
     // MARK: Initialization
 
-    internal init(remotePeripheral: BKRemotePeripheral, timer: Timer, completionHandler: @escaping ((BKRemotePeripheral, BKConnectionPool.BKError?) -> Void)) {
+    internal init(remotePeripheral: BKRemotePeripheral, timer: Timer, completionHandler: @escaping ((BKRemotePeripheral, BKConnectError?) -> Void)) {
         self.remotePeripheral = remotePeripheral
         self.timer = timer
         self.completionHandler = completionHandler

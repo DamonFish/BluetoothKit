@@ -97,7 +97,7 @@ internal class BKCentralStateMachine {
 
     private func handleScanEvent(_ event: Event) throws {
         switch state {
-        case .available:
+        case .available, .scanning:
             state = .scanning
         default:
             throw BKError.transitioning(currentState: state, validStates: [.available])

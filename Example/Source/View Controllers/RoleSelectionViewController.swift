@@ -85,7 +85,7 @@ internal class RoleSelectionViewController: UIViewController {
             navigationController?.pushViewController(CentralViewController(), animated: true)
         } else if button == peripheralButton {
             #if os(iOS)
-                navigationController?.pushViewController(PeripheralViewController(), animated: true)
+//                navigationController?.pushViewController(PeripheralViewController(), animated: true)
             #endif
         }
     }

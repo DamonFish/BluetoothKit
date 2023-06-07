@@ -16,9 +16,6 @@
 		91A105BC26B1A6F700CB3209 /* BKPeripheralStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105A226B1A6F700CB3209 /* BKPeripheralStateMachine.swift */; };
 		91A105BD26B1A6F700CB3209 /* BKPeripheralStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105A226B1A6F700CB3209 /* BKPeripheralStateMachine.swift */; };
 		91A105BE26B1A6F700CB3209 /* BKPeripheralStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105A226B1A6F700CB3209 /* BKPeripheralStateMachine.swift */; };
-		91A105BF26B1A6F700CB3209 /* BKPeripheralConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105A326B1A6F700CB3209 /* BKPeripheralConfiguration.swift */; };
-		91A105C026B1A6F700CB3209 /* BKPeripheralConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105A326B1A6F700CB3209 /* BKPeripheralConfiguration.swift */; };
-		91A105C126B1A6F700CB3209 /* BKPeripheralConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105A326B1A6F700CB3209 /* BKPeripheralConfiguration.swift */; };
 		91A105C226B1A6F700CB3209 /* BKErrorDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105A426B1A6F700CB3209 /* BKErrorDomain.swift */; };
 		91A105C326B1A6F700CB3209 /* BKErrorDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105A426B1A6F700CB3209 /* BKErrorDomain.swift */; };
 		91A105C426B1A6F700CB3209 /* BKErrorDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105A426B1A6F700CB3209 /* BKErrorDomain.swift */; };
@@ -31,9 +28,6 @@
 		91A105CB26B1A6F700CB3209 /* BKAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105A726B1A6F700CB3209 /* BKAvailability.swift */; };
 		91A105CC26B1A6F700CB3209 /* BKAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105A726B1A6F700CB3209 /* BKAvailability.swift */; };
 		91A105CD26B1A6F700CB3209 /* BKAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105A726B1A6F700CB3209 /* BKAvailability.swift */; };
-		91A105CE26B1A6F700CB3209 /* BKRemoteCentral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105A826B1A6F700CB3209 /* BKRemoteCentral.swift */; };
-		91A105CF26B1A6F700CB3209 /* BKRemoteCentral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105A826B1A6F700CB3209 /* BKRemoteCentral.swift */; };
-		91A105D026B1A6F700CB3209 /* BKRemoteCentral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105A826B1A6F700CB3209 /* BKRemoteCentral.swift */; };
 		91A105D126B1A6F700CB3209 /* BKRemotePeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105A926B1A6F700CB3209 /* BKRemotePeer.swift */; };
 		91A105D226B1A6F700CB3209 /* BKRemotePeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105A926B1A6F700CB3209 /* BKRemotePeer.swift */; };
 		91A105D326B1A6F700CB3209 /* BKRemotePeer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105A926B1A6F700CB3209 /* BKRemotePeer.swift */; };
@@ -46,9 +40,6 @@
 		91A105DA26B1A6F700CB3209 /* BKConnectionPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105AC26B1A6F700CB3209 /* BKConnectionPool.swift */; };
 		91A105DB26B1A6F700CB3209 /* BKConnectionPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105AC26B1A6F700CB3209 /* BKConnectionPool.swift */; };
 		91A105DC26B1A6F700CB3209 /* BKConnectionPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105AC26B1A6F700CB3209 /* BKConnectionPool.swift */; };
-		91A105DD26B1A6F700CB3209 /* BKPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105AD26B1A6F700CB3209 /* BKPeripheral.swift */; };
-		91A105DE26B1A6F700CB3209 /* BKPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105AD26B1A6F700CB3209 /* BKPeripheral.swift */; };
-		91A105DF26B1A6F700CB3209 /* BKPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105AD26B1A6F700CB3209 /* BKPeripheral.swift */; };
 		91A105E026B1A6F700CB3209 /* BKCBPeripheralDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105AE26B1A6F700CB3209 /* BKCBPeripheralDelegateProxy.swift */; };
 		91A105E126B1A6F700CB3209 /* BKCBPeripheralDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105AE26B1A6F700CB3209 /* BKCBPeripheralDelegateProxy.swift */; };
 		91A105E226B1A6F700CB3209 /* BKCBPeripheralDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A105AE26B1A6F700CB3209 /* BKCBPeripheralDelegateProxy.swift */; };
@@ -82,17 +73,14 @@
 		91A105A026B1A6F700CB3209 /* BKCBCentralManagerDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BKCBCentralManagerDelegateProxy.swift; sourceTree = "<group>"; };
 		91A105A126B1A6F700CB3209 /* BKDiscovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BKDiscovery.swift; sourceTree = "<group>"; };
 		91A105A226B1A6F700CB3209 /* BKPeripheralStateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BKPeripheralStateMachine.swift; sourceTree = "<group>"; };
-		91A105A326B1A6F700CB3209 /* BKPeripheralConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BKPeripheralConfiguration.swift; sourceTree = "<group>"; };
 		91A105A426B1A6F700CB3209 /* BKErrorDomain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BKErrorDomain.swift; sourceTree = "<group>"; };
 		91A105A526B1A6F700CB3209 /* BKCBPeripheralManagerDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BKCBPeripheralManagerDelegateProxy.swift; sourceTree = "<group>"; };
 		91A105A626B1A6F700CB3209 /* BKCentralStateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BKCentralStateMachine.swift; sourceTree = "<group>"; };
 		91A105A726B1A6F700CB3209 /* BKAvailability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BKAvailability.swift; sourceTree = "<group>"; };
-		91A105A826B1A6F700CB3209 /* BKRemoteCentral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BKRemoteCentral.swift; sourceTree = "<group>"; };
 		91A105A926B1A6F700CB3209 /* BKRemotePeer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BKRemotePeer.swift; sourceTree = "<group>"; };
 		91A105AA26B1A6F700CB3209 /* BKContinuousScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BKContinuousScanner.swift; sourceTree = "<group>"; };
 		91A105AB26B1A6F700CB3209 /* BKScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BKScanner.swift; sourceTree = "<group>"; };
 		91A105AC26B1A6F700CB3209 /* BKConnectionPool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BKConnectionPool.swift; sourceTree = "<group>"; };
-		91A105AD26B1A6F700CB3209 /* BKPeripheral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BKPeripheral.swift; sourceTree = "<group>"; };
 		91A105AE26B1A6F700CB3209 /* BKCBPeripheralDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BKCBPeripheralDelegateProxy.swift; sourceTree = "<group>"; };
 		91A105AF26B1A6F700CB3209 /* BKCentral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BKCentral.swift; sourceTree = "<group>"; };
 		91A105B026B1A6F700CB3209 /* BKSendDataTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BKSendDataTask.swift; sourceTree = "<group>"; };
@@ -139,17 +127,14 @@
 				91A105A026B1A6F700CB3209 /* BKCBCentralManagerDelegateProxy.swift */,
 				91A105A126B1A6F700CB3209 /* BKDiscovery.swift */,
 				91A105A226B1A6F700CB3209 /* BKPeripheralStateMachine.swift */,
-				91A105A326B1A6F700CB3209 /* BKPeripheralConfiguration.swift */,
 				91A105A426B1A6F700CB3209 /* BKErrorDomain.swift */,
 				91A105A526B1A6F700CB3209 /* BKCBPeripheralManagerDelegateProxy.swift */,
 				91A105A626B1A6F700CB3209 /* BKCentralStateMachine.swift */,
 				91A105A726B1A6F700CB3209 /* BKAvailability.swift */,
-				91A105A826B1A6F700CB3209 /* BKRemoteCentral.swift */,
 				91A105A926B1A6F700CB3209 /* BKRemotePeer.swift */,
 				91A105AA26B1A6F700CB3209 /* BKContinuousScanner.swift */,
 				91A105AB26B1A6F700CB3209 /* BKScanner.swift */,
 				91A105AC26B1A6F700CB3209 /* BKConnectionPool.swift */,
-				91A105AD26B1A6F700CB3209 /* BKPeripheral.swift */,
 				91A105AE26B1A6F700CB3209 /* BKCBPeripheralDelegateProxy.swift */,
 				91A105AF26B1A6F700CB3209 /* BKCentral.swift */,
 				91A105B026B1A6F700CB3209 /* BKSendDataTask.swift */,
@@ -390,7 +375,6 @@
 				91A105E526B1A6F700CB3209 /* BKCentral.swift in Sources */,
 				91A105E826B1A6F700CB3209 /* BKSendDataTask.swift in Sources */,
 				91A105F426B1A6F700CB3209 /* BKDiscoveriesChange.swift in Sources */,
-				91A105DF26B1A6F700CB3209 /* BKPeripheral.swift in Sources */,
 				91A105EB26B1A6F700CB3209 /* BKConfiguration.swift in Sources */,
 				91A105DC26B1A6F700CB3209 /* BKConnectionPool.swift in Sources */,
 				91A105BE26B1A6F700CB3209 /* BKPeripheralStateMachine.swift in Sources */,
@@ -400,10 +384,8 @@
 				91A105F726B1A6F700CB3209 /* BKConnectionAttempt.swift in Sources */,
 				91A105BB26B1A6F700CB3209 /* BKDiscovery.swift in Sources */,
 				91A105C726B1A6F700CB3209 /* BKCBPeripheralManagerDelegateProxy.swift in Sources */,
-				91A105C126B1A6F700CB3209 /* BKPeripheralConfiguration.swift in Sources */,
 				91A105F126B1A6F700CB3209 /* BKRemotePeripheral.swift in Sources */,
 				91A105EE26B1A6F700CB3209 /* BKPeer.swift in Sources */,
-				91A105D026B1A6F700CB3209 /* BKRemoteCentral.swift in Sources */,
 				91A105CA26B1A6F700CB3209 /* BKCentralStateMachine.swift in Sources */,
 				91A105E226B1A6F700CB3209 /* BKCBPeripheralDelegateProxy.swift in Sources */,
 				91A105C426B1A6F700CB3209 /* BKErrorDomain.swift in Sources */,
@@ -419,7 +401,6 @@
 				91A105E326B1A6F700CB3209 /* BKCentral.swift in Sources */,
 				91A105E626B1A6F700CB3209 /* BKSendDataTask.swift in Sources */,
 				91A105F226B1A6F700CB3209 /* BKDiscoveriesChange.swift in Sources */,
-				91A105DD26B1A6F700CB3209 /* BKPeripheral.swift in Sources */,
 				91A105E926B1A6F700CB3209 /* BKConfiguration.swift in Sources */,
 				91A105DA26B1A6F700CB3209 /* BKConnectionPool.swift in Sources */,
 				91A105BC26B1A6F700CB3209 /* BKPeripheralStateMachine.swift in Sources */,
@@ -429,10 +410,8 @@
 				91A105F526B1A6F700CB3209 /* BKConnectionAttempt.swift in Sources */,
 				91A105B926B1A6F700CB3209 /* BKDiscovery.swift in Sources */,
 				91A105C526B1A6F700CB3209 /* BKCBPeripheralManagerDelegateProxy.swift in Sources */,
-				91A105BF26B1A6F700CB3209 /* BKPeripheralConfiguration.swift in Sources */,
 				91A105EF26B1A6F700CB3209 /* BKRemotePeripheral.swift in Sources */,
 				91A105EC26B1A6F700CB3209 /* BKPeer.swift in Sources */,
-				91A105CE26B1A6F700CB3209 /* BKRemoteCentral.swift in Sources */,
 				91A105C826B1A6F700CB3209 /* BKCentralStateMachine.swift in Sources */,
 				91A105E026B1A6F700CB3209 /* BKCBPeripheralDelegateProxy.swift in Sources */,
 				91A105C226B1A6F700CB3209 /* BKErrorDomain.swift in Sources */,
@@ -448,7 +427,6 @@
 				91A105E426B1A6F700CB3209 /* BKCentral.swift in Sources */,
 				91A105E726B1A6F700CB3209 /* BKSendDataTask.swift in Sources */,
 				91A105F326B1A6F700CB3209 /* BKDiscoveriesChange.swift in Sources */,
-				91A105DE26B1A6F700CB3209 /* BKPeripheral.swift in Sources */,
 				91A105EA26B1A6F700CB3209 /* BKConfiguration.swift in Sources */,
 				91A105DB26B1A6F700CB3209 /* BKConnectionPool.swift in Sources */,
 				91A105BD26B1A6F700CB3209 /* BKPeripheralStateMachine.swift in Sources */,
@@ -458,10 +436,8 @@
 				91A105F626B1A6F700CB3209 /* BKConnectionAttempt.swift in Sources */,
 				91A105BA26B1A6F700CB3209 /* BKDiscovery.swift in Sources */,
 				91A105C626B1A6F700CB3209 /* BKCBPeripheralManagerDelegateProxy.swift in Sources */,
-				91A105C026B1A6F700CB3209 /* BKPeripheralConfiguration.swift in Sources */,
 				91A105F026B1A6F700CB3209 /* BKRemotePeripheral.swift in Sources */,
 				91A105ED26B1A6F700CB3209 /* BKPeer.swift in Sources */,
-				91A105CF26B1A6F700CB3209 /* BKRemoteCentral.swift in Sources */,
 				91A105C926B1A6F700CB3209 /* BKCentralStateMachine.swift in Sources */,
 				91A105E126B1A6F700CB3209 /* BKCBPeripheralDelegateProxy.swift in Sources */,
 				91A105C326B1A6F700CB3209 /* BKErrorDomain.swift in Sources */,
