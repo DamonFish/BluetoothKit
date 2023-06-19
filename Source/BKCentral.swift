@@ -194,7 +194,11 @@ public class BKCentral: BKPeer, BKCBCentralManagerStateDelegate, BKConnectionPoo
                 errorHandler?(error)
             })
         } catch {
-            errorHandler?(BKScanError.internalError(underlyingError: error))
+            if let scanError = error as? BKScanError {
+                errorHandler?(scanError)
+            } else {
+                errorHandler?(BKScanError.internalError(underlyingError: error))
+            }
         }
     }
 
@@ -222,7 +226,11 @@ public class BKCentral: BKPeer, BKCBCentralManagerStateDelegate, BKConnectionPoo
                 completionHandler(remotePeripheral, error)
             }
         } catch {
-            completionHandler(remotePeripheral, .internal(underlyingError: error))
+            if let connectError = error as? BKConnectError {
+                completionHandler(remotePeripheral, connectError)
+            } else {
+                completionHandler(remotePeripheral, .internal(underlyingError: error))
+            }
             return
         }
     }
