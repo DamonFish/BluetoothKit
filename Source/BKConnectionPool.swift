@@ -33,7 +33,6 @@ public enum BKConnectError: Error {
     case noCentralManagerSet
     case alreadyConnected
     case alreadyConnecting
-    case connectionByUUIDIsNotImplementedYet
     case interrupted
     case noConnectionAttemptForRemotePeripheral
     case noConnectionForRemotePeripheral
@@ -53,7 +52,7 @@ internal class BKConnectionPool: BKCBCentralManagerConnectionDelegate {
 
     // MARK: Internal Functions
 
-    internal func connectWithTimeout(_ timeout: TimeInterval, remotePeripheral: BKRemotePeripheral, completionHandler: @escaping ((_ peripheralEntity: BKRemotePeripheral, _ error: Error?) -> Void)) throws {
+    internal func connectWithTimeout(_ timeout: TimeInterval, remotePeripheral: BKRemotePeripheral, completionHandler: @escaping ((_ peripheralEntity: BKRemotePeripheral, _ error: BKConnectError?) -> Void)) throws {
         guard centralManager != nil else {
             throw BKConnectError.noCentralManagerSet
         }
@@ -63,9 +62,6 @@ internal class BKConnectionPool: BKCBCentralManagerConnectionDelegate {
         guard !connectionAttempts.map({ connectionAttempt in return connectionAttempt.remotePeripheral }).contains(remotePeripheral) else {
             throw BKConnectError.alreadyConnecting
         }
-//        guard remotePeripheral.peripheral != nil else {
-//            throw BKError.connectionByUUIDIsNotImplementedYet
-//        }
         let timer = Timer.scheduledTimer(timeInterval: timeout, target: self, selector: #selector(BKConnectionPool.timerElapsed(_:)), userInfo: nil, repeats: false)
         remotePeripheral.prepareForConnection()
         connectionAttempts.append(BKConnectionAttempt(remotePeripheral: remotePeripheral, timer: timer, completionHandler: completionHandler))

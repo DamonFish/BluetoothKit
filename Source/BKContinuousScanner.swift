@@ -27,17 +27,9 @@ import Foundation
 internal class BKContinousScanner {
     // MARK: Type Aliases
 
-    internal typealias ErrorHandler = (_ error: BKError) -> Void
+    internal typealias ErrorHandler = (_ error: BKScanError) -> Void
     internal typealias StateHandler = BKCentral.ContinuousScanStateHandler
     internal typealias ChangeHandler = BKCentral.ContinuousScanChangeHandler
-
-    // MARK: Enums
-
-    internal enum BKError: Error {
-        case busy
-        case interrupted
-        case internalError(underlyingError: Error)
-    }
 
     // MARK: Properties
 
@@ -111,7 +103,7 @@ internal class BKContinousScanner {
                 }
             }, completionHandler: { result, error in
                 guard result != nil && error == nil else {
-                    self.endScanning(BKError.internalError(underlyingError: error! as Error))
+                    self.endScanning(error)
                     return
                 }
                 let discoveriesToRemove = self.maintainedDiscoveries.filter({ !result!.contains($0) })
@@ -125,7 +117,11 @@ internal class BKContinousScanner {
                 self.inBetweenDelayTimer = Timer.scheduledTimer(timeInterval: self.inBetweenDelay, target: self, selector: #selector(BKContinousScanner.inBetweenDelayTimerElapsed), userInfo: nil, repeats: false)
             })
         } catch {
-            endScanning(BKError.internalError(underlyingError: error))
+            if let scanError = error as? BKScanError {
+                endScanning(scanError)
+            } else {
+                endScanning(BKScanError.internalError(underlyingError: error))
+            }
         }
     }
 
@@ -137,7 +133,7 @@ internal class BKContinousScanner {
         changeHandler = nil
     }
 
-    private func endScanning(_ error: BKError?) {
+    private func endScanning(_ error: BKScanError?) {
         busy = false
         state = .stopped
         let errorHandler = self.errorHandler

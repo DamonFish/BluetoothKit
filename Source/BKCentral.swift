@@ -50,8 +50,8 @@ public class BKCentral: BKPeer, BKCBCentralManagerStateDelegate, BKConnectionPoo
     public typealias ScanCompletionHandler = (_ result: [BKDiscovery]?, _ error: BKError?) -> Void
     public typealias ContinuousScanChangeHandler = (_ changes: [BKDiscoveriesChange], _ discoveries: [BKDiscovery]) -> Void
     public typealias ContinuousScanStateHandler = (_ newState: ContinuousScanState) -> Void
-    public typealias ContinuousScanErrorHandler = (_ error: BKError) -> Void
-    public typealias ConnectCompletionHandler = (_ remotePeripheral: BKRemotePeripheral, _ error: BKError?) -> Void
+    public typealias ContinuousScanErrorHandler = (_ error: BKScanError) -> Void
+    public typealias ConnectCompletionHandler = (_ remotePeripheral: BKRemotePeripheral, _ error: BKConnectError?) -> Void
 
     // MARK: Enums
 
@@ -191,10 +191,10 @@ public class BKCentral: BKPeer, BKCBCentralManagerStateDelegate, BKConnectionPoo
                 }
                 stateHandler?(newState)
             }, duration: duration, inBetweenDelay: inBetweenDelay, updateDuplicates: updateDuplicates, errorHandler: { error in
-                errorHandler?(.internalError(underlyingError: error))
+                errorHandler?(error)
             })
         } catch {
-            errorHandler?(.internalError(underlyingError: error))
+            errorHandler?(BKScanError.internalError(underlyingError: error))
         }
     }
 
@@ -216,16 +216,13 @@ public class BKCentral: BKPeer, BKCBCentralManagerStateDelegate, BKConnectionPoo
         do {
             try stateMachine.handleEvent(.connect)
             try connectionPool.connectWithTimeout(timeout, remotePeripheral: remotePeripheral) { remotePeripheral, error in
-                var returnError: BKError?
                 if error == nil {
                     _ = try? self.stateMachine.handleEvent(.setAvailable)
-                } else {
-                    returnError = .internalError(underlyingError: error)
                 }
-                completionHandler(remotePeripheral, returnError)
+                completionHandler(remotePeripheral, error)
             }
         } catch {
-            completionHandler(remotePeripheral, .internalError(underlyingError: error))
+            completionHandler(remotePeripheral, .internal(underlyingError: error))
             return
         }
     }

@@ -25,18 +25,20 @@
 import CoreBluetooth
 import Foundation
 
+// MARK: Enums
+
+public enum BKScanError: Error {
+    case noCentralManagerSet
+    case busy
+    case interrupted
+    case internalError(underlyingError: Error)
+    case timeout
+}
+
 internal class BKScanner: BKCBCentralManagerDiscoveryDelegate {
     // MARK: Type Aliases
 
-    internal typealias ScanCompletionHandler = (_ result: [BKDiscovery]?, _ error: BKError?) -> Void
-
-    // MARK: Enums
-
-    internal enum BKError: Error {
-        case noCentralManagerSet
-        case busy
-        case interrupted
-    }
+    internal typealias ScanCompletionHandler = (_ result: [BKDiscovery]?, _ error: BKScanError?) -> Void
 
     // MARK: Properties
 
@@ -77,18 +79,18 @@ internal class BKScanner: BKCBCentralManagerDiscoveryDelegate {
 
     private func validateForActivity() throws {
         guard !busy else {
-            throw BKError.busy
+            throw BKScanError.busy
         }
         guard centralManager != nil else {
-            throw BKError.noCentralManagerSet
+            throw BKScanError.noCentralManagerSet
         }
     }
 
     @objc private func durationTimerElapsed() {
-        endScan(nil)
+        endScan(.timeout)
     }
 
-    private func endScan(_ error: BKError?) {
+    private func endScan(_ error: BKScanError?) {
         invalidateTimer()
         centralManager.stopScan()
         let completionHandler = scanHandlers?.completionHandler
